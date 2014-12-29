@@ -15,12 +15,12 @@ class ArticlesController < ApplicationController
         @article.title = params[:article][:title]
         @article.body = params[:article][:body]
         @article.save
-        flash.notice = "Article '{@article.title}' was created!"
+        flash.notice = "Article '#{@article.title}' was created!"
         redirect_to article_path(@article)
     end
     def destroy
         Article.find(params[:id]).destroy
-        flash.notice = "Article '{@article.title}' was removed!"
+        flash.notice = "Article '#{@article.title}' was removed!"
         redirect_to articles_path
     end
     def edit
@@ -33,6 +33,6 @@ class ArticlesController < ApplicationController
         redirect_to article_path(@article)
     end
     def article_params
-        params.require(:article).permit(:id, :body, :title, :tag_list)
+        params.require(:article).permit(:id, :body, :title, :tag_list, :image)
     end
 end
