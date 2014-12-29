@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+            before_filter :require_login, only: [:destroy, :new, :create, :update, :edit]
     def index
         @articles = Article.all
     end
@@ -11,10 +12,7 @@ class ArticlesController < ApplicationController
         @article = Article.new
     end
     def create
-        @article = Article.new
-        @article.title = params[:article][:title]
-        @article.body = params[:article][:body]
-        @article.save
+        @article = Article.create(article_params)
         flash.notice = "Article '#{@article.title}' was created!"
         redirect_to article_path(@article)
     end
